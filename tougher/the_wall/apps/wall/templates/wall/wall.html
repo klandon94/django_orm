@@ -1,0 +1,82 @@
+{% extends 'wall/index.html' %}
+
+{% block title %} Wall | Main Page {% endblock %}
+
+{% block wall %}
+
+<nav class='navbar navbar-inverse'>
+    <div class='container-fluid'>
+        <div class='navbar-header'>
+            <a class='navbar-brand active' href='#'>CodingDojo Wall</a>
+        </div>
+        <ul class='nav navbar-nav navbar-center'>
+            <li><a><span class='glyphicon glyphicon-user'></span> {{request.session.username}} {{request.session.lastname}}</a></li>
+        </ul>
+        <ul class='nav navbar-nav navbar-right'>
+            <li><a>Messages: {{request.session.mymsgs}}</a></li>
+            <li><a>Comments: {{request.session.mycoms}}</a></li>
+            <li><a href='/logout'><span class='glyphicon glyphicon-log-in'></span> Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div id='postmessage'>
+    <form action='/postmsg' method='post'>
+        {% csrf_token %}
+        <div class='form-group shadow-textarea'>
+            <label for='textarea'>Post a message</label>
+            <textarea name='message' class='form-control z-depth-2' id='textarea' rows='5' placeholder='Write message here...'></textarea>
+        </div>
+        <button id='postmsg' class='btn btn-primary pull-right' type='submit' value='postmsg'>POST MESSAGE</button>
+    </form>
+</div>
+
+<div id='allmessages'>
+    <h1>MESSAGES AND COMMENTS</h1><br>
+    {% if messages %}
+        {% for message in messages %}
+            <p class="{{message.tags}}">{{message}}</p>
+        {% endfor %}
+    {% endif %}
+
+    {% if allmessages %}
+        {% for message in allmessages %}
+            <div class='message'>
+                <p>{{message.messenger.first_name}} {{message.messenger.last_name}} - {{message.created_at}}</p>
+                <span class='msg'><b>{{message.content}}</b></span>
+                {% if message.messenger.id == request.session.id %}
+                    <h4><a href='delmsg/{{message.id}}'><span class='glyphicon glyphicon-trash pull-right'></span></a></h4>
+                {% endif %}
+            </div>
+            {% if allcomments %}
+                {% for comment in allcomments %}
+                    {% if comment.whichmessage.id == message.id %}
+                        <div class='comment'>
+                            <p>{{comment.commenter.first_name}} {{comment.commenter.last_name}} - {{comment.created_at}}</p>
+                            <span class='com'><b>{{comment.content}}</b></span>
+                            {% if comment.commenter.id == request.session.id %}
+                                <h5 class='deletecom'><a href='delcom/{{comment.id}}'><span class='glyphicon glyphicon-trash pull-right'></span></a></h5>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <div class='newcomment'>
+                <form action='/postcom/{{message.id}}' method='post'>
+                    {% csrf_token %}
+                    <div class='form-group shadow-textarea'>
+                        <label for='textarea2'>Post a comment</label>
+                        <textarea name='comment' class='form-control z-depth-2' id='textarea2' rows='3' placeholder='Write comment here...'></textarea>
+                    </div>
+                    <button id='postcom' class='btn btn-success pull-right' type='submit' value='postcom'>POST COMMENT</button>
+                </form>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h3>NO MESSAGES!</h3>
+    {% endif %}
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'course/index.html' %}
+
+{% block title %} Courses/Add course {% endblock %}
+
+{% block courses %}
+
+{% if messages %}
+    {% for message in messages %}
+        <p class="{{message.tags}}">{{message}}</p>
+    {% endfor %}
+{% endif %}
+
+<h2>Add a new course</h2>
+<form action='/courses/create' method='post'>
+    {% csrf_token %}
+    <div class='form-group form-inline'>
+        <label for='name'>Name:</label>
+        <input type='text' name='name' id='name' class='form-control'>
+    </div>
+    <div class='form-group form-inline'>
+        <label for='desc'>Description:</label>
+        <textarea id='desc' name='desc' class='form-control'></textarea>
+    </div>
+    <button type='submit' class='btn btn-success' value='Add'>Add</button>
+</form>
+
+<h2 id='courses'>Courses</h2>
+<center>
+    <table class='table table-bordered' style='width:75%'>
+        <thead>
+            <tr>
+                <th>Course Name</th>
+                <th>Description</th>
+                <th>Time Added</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        {% for course in courses %}
+        <tbody>
+            <td>{{course.name}}</td>
+            <td>{{course.desc}}</td>
+            <td>{{course.created_at}}</td>
+            <td><a href='/courses/delete/{{course.id}}'>Remove</a></td>
+        </tbody>
+        {% endfor %}
+    </table>
+</center>
+{% endblock %}

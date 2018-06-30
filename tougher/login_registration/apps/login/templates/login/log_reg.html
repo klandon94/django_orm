@@ -1,0 +1,120 @@
+{% extends 'login/login.html' %}
+
+{% block title %} Login and Registration | Home {%endblock%}
+
+{% block body %}
+
+<h1>Login and Registration</h1>
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.extra_tags == 'logout' %}
+            <p class="{{message.tags}}" style='margin-left:75px'>{{message}}</p>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<div id='container'>
+    <div id='register'>
+        <h3>Register here!</h3>
+        <form action="/register" method='post'>
+            {% csrf_token %}
+            <div class="form-group">                
+                <label for="First_Name">First Name:</label>
+                <br>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.extra_tags == 'first_name' %}
+                            <p class="{{message.tags}}">{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <input type="text" name='first_name' value='{{request.session.first_name}}' class="form-control" id="First_Name" placeholder="First Name">
+            </div>
+            <div class="form-group">
+                <label for="Last_Name">Last Name:</label>                
+                <br>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.extra_tags == 'last_name' %}
+                            <p class="{{message.tags}}">{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}        
+                <input type="text" name='last_name' value='{{request.session.last_name}}' class="form-control" id="Last_Name" placeholder="Last Name">
+            </div>
+            <div class="form-group">
+                <label for="Email">Email:</label>                
+                <br>       
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.extra_tags == 'email' %}
+                            <p class="{{message.tags}}">{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}       
+                <input type="text" name='email' value='{{request.session.email}}' class="form-control" id="Email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="Password">Password:</label>                
+                <br> 
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.extra_tags == 'password' %}
+                            <p class="{{message.tags}}">{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}             
+                <input type="password" name='password' class="form-control" id="Password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="Confirm_Password">Confirm password:</label>                
+                <br>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.extra_tags == 'confirm_password' %}
+                            <p class="{{message.tags}}">{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <input type="password" name='confirm_password' class="form-control" id="Confirm_Password" placeholder="Confirm password">
+            </div>
+            <div class="form-group" id='birthdate'>
+                <label for="Birthday">Birthday:</label>                
+                <br> 
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.extra_tags == 'birthday' %}
+                            <p class="{{message.tags}}">{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}           
+                <input type="text" name='birthday' value='{{request.session.birthday}}' class="form-control datepicker" id="Birthday">
+            </div>
+            <button type="submit" value='Register' class='btn btn-success'>Register!</button>
+        </form>
+    </div>
+    <div id='login'>
+        <h3>Login here!</h3>
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.extra_tags == 'login' %}
+                    <p class="{{message.tags}}">{{message}}</p>
+                {% endif %}
+            {% endfor %}
+        {% endif %}         
+        <form action="/login" method='post'>
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="LEmail">Email:</label>
+                <input type="text" name='login_email' value='{{request.session.login_email}}' class="form-control" id="LEmail" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="LPassword">Password:</label>
+                <input type="password" name='login_password' class="form-control" id="LPassword" placeholder="Password">
+            </div>
+            <button type="submit" value='Login' class='btn btn-success'>Login!</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

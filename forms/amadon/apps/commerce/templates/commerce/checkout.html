@@ -1,0 +1,14 @@
+{% extends 'commerce/index.html' %}
+
+{% block title %} Amadon Checkout {% endblock %}
+
+{% block checkout %}
+<div id='checkout'>
+<h1>Thank you for your business!</h1>
+<p>You purchased <span class='red'>{{quantity}} {{name}}(s)</span></p>
+<p>We charged your credit card for <span class='green'>${{charged}}</span></p>
+<p>You have ordered <span class='red'>{{totalitems}}</span> items so far and spent <span class='green'>${{totalcharged}}</span> with Amadon.com!</p>
+<br><br>
+<a href='/amadon'>Home page</a>
+</div>
+{% endblock %}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
+    <!-- Optional theme --> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <title>{% block title %} {% endblock %}</title>
+    <style>
+        .container{
+            padding:30px;
+            width:40%;
+            border:2px solid black;
+            margin-top:100px;
+        }
+        h1{
+            text-align:center;
+        }
+        .error{
+            color:darkred;
+            font-weight:bold;
+        }
+        .success{
+            color:darkgreen;
+            font-weight:bold;
+        }
+        #simple{
+            font-size:75px;
+        }
+
+
+        textarea{
+            width:100%;
+        }
+        #postmessage{
+            width:85%;
+            margin: 0px auto;
+        }
+        .shadow-textarea textarea.form-control::placeholder {
+            font-weight:500;
+        }
+        #allmessages{
+            width:85%;
+            margin: auto;
+            margin-top:50px;
+            margin-bottom:50px;
+        }
+        .message{
+            margin-bottom:20px;
+        }
+        .msg{
+            color:blue;
+            margin-left:20px;
+            font-size:20px;
+            font-style:bold;
+        }
+
+        .comment{
+            width:60%;
+            padding:10px;
+            margin: 20px 0 20px 50px;
+            border:1px solid black;
+            border-radius:5px;
+        }
+        .com{
+            color: darkgoldenrod;
+            margin-left:40px;
+            font-size:15px;
+        }
+        .newcomment{
+            margin: 0 0 60px 50px;
+            width:60%
+        }
+        .deletecom{
+            margin-top:-10px;
+        }
+    </style>
+</head>
+<body>
+    {% block login %}
+    {% endblock %}
+
+    {% block wall %}
+    {% endblock %}
+</body>
+</html>

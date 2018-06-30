@@ -1,0 +1,16 @@
+{% extends 'course/index.html' %}
+
+{% block title %} Delete course {% endblock %}
+
+{% block delete %}
+
+<center>
+    <h1>Are you sure you want to delete the following course?</h1>
+    <p class='confirm'>Name: {{rmv.name}}</p>
+    <p class='confirm'>Description: {{rmv.desc}}</p>
+    <br>
+    <a href='/courses' class='btn btn-primary'>No, go back</a>
+    <a href='/courses/destroy/{{rmv.id}}' class='btn btn-danger'>Yes! Please delete</a>
+</center>
+
+{% endblock %}

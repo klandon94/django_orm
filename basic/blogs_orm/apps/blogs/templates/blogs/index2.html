@@ -1,0 +1,14 @@
+{% extends 'blogs/index.html' %}
+
+{% block form %}
+
+<form action='/blogs/newcreate' method='post'>
+    {% csrf_token %}
+    <label for='name'>Blog Name:</label>
+    <input type='text' id='name' name='name' placeholder='blog name'>
+    <label for='desc'>Description</label>
+    <textarea id='desc' name='desc' placeholder='description'></textarea>
+    <button type='submit'>Submit</button>
+</form>
+
+{% endblock %}

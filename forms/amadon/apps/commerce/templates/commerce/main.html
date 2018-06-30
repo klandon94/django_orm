@@ -1,0 +1,45 @@
+{% extends 'commerce/index.html' %}
+
+{% block title %} Amadon main page {% endblock %}
+
+{% block main %}
+
+<h1>Amadon Store!</h1>
+
+<center>
+    <table class='table table-bordered' style='width:75%'>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        {% for product in products %}
+        <tbody>
+            <td>{{product.name}}</td>
+            <td>${{product.price}}</td>
+            <td>
+                <form action='/amadon/buy' method='post'>
+                    {%csrf_token%}
+                    <select name='quantity'>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+            </td>
+            <td>
+                    <input type='hidden' name='product_id' value='{{product.id}}'>
+                    <button class='btn btn-primary' type='submit'>Buy!</button>
+                </form>
+            </td>
+            
+        </tbody>
+        {%endfor%}
+    </table>
+</center>
+
+{% endblock %}

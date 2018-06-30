@@ -1,0 +1,15 @@
+{% extends 'login/login.html' %}
+
+{% block title %} Login and Registration | Success {%endblock%}
+
+{% block login %}
+{% if messages %}
+    {% for message in messages %}
+        {% if message.extra_tags == 'successful' %}
+            <p class="{{message.tags}}">{{message}}</p>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+    <h1>Welcome {{request.session.loggedinuser}}, you're logged in!</h1>
+    <a href='/logout' class='btn btn-primary' id='logout'>Logout</a>
+{% endblock %}

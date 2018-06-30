@@ -1,0 +1,27 @@
+{% extends 'users/index.html' %}
+
+{% block title %} Edit user {{user.id}} {% endblock %}
+
+{% block edit %}
+
+<h1>Edit User {{user.id}}</h1>
+<form action='/users/{{user.id}}/update' method='post'>
+    {% csrf_token %}
+    <div class='form-group'>
+        <label for='first_name'>First Name:</label>
+        <input type='text' name='first_name' class='form-control' id='first_name'>
+    </div>
+    <div class='form-group'>
+        <label for='last_name'>Last Name:</label>
+        <input type='text' name='last_name' class='form-control' id='last_name'>
+    </div>
+    <div class='form-group'>
+        <label for='email'>Email:</label>
+        <input type='text' name='email' class='form-control' id='email'>
+    </div>
+    <button type='submit' value='Update' class='btn btn-primary'>Update</button>
+</form>
+<br>
+<a href='/users/{{user.id}}'>Show</a>   <a href='/users'>Go Back</a>
+
+{% endblock %}
