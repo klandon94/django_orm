@@ -6,8 +6,14 @@
 
 <h1 id='simple'>THE WALL</h1>
 
+<div id="buttons">
+    <a href="/log" class="btn btn-success">Login</a>
+    <a href="/reg" class="btn btn-success">Register</a>
+</div>
+
 <div class='container'>
-    <h1>Please Login</h1>
+    {% if request.session.action == 'login' %}
+    <h1>Log in</h1>
     <br>
     {% if messages %}
         {% for message in messages %}
@@ -26,8 +32,43 @@
             <label for="password">Password:</label>
             <input type="password" name='login_password' class="form-control" id="password" placeholder="Password">
         </div>
-        <input class='btn btn-primary center-block' type='submit' value='Submit' id="button">
+        <input class='btn btn-primary center-block' type='submit' value='Submit'>
     </form>
+    {% else %}
+    <h1>Register</h1>
+    <br>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.extra_tags == 'register' or message.extra_tags == 'logout' %}
+                <p class="{{message.tags}}">{{message}}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <form action="/register" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="first_name">First name:</label>
+            <input type="text" name='first_name' value='{{request.session.first_name}}' class="form-control" id="firstname" placeholder="First name">
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last name:</label>
+            <input type="text" name='last_name' value='{{request.session.last_name}}' class="form-control" id="lastname" placeholder="Last name">
+        </div>
+        <div class="form-group">
+            <label for="register_email">Email:</label>
+            <input type="text" name='register_email' value='{{request.session.register_email}}' class="form-control" id="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="register_password">Password:</label>
+            <input type="password" name='register_password' class="form-control" id="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="confirm_password">Confirm password:</label>
+            <input type="password" name='confirm_password' class="form-control" id="confirm_password" placeholder="Confirm password">
+        </div>
+        <input class='btn btn-primary center-block' type='submit' value='Submit'>
+    </form>
+    {% endif %}
 </div>
 
 {% endblock %}

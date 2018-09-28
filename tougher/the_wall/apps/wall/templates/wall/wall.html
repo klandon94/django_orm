@@ -10,7 +10,7 @@
             <a class='navbar-brand active' href='#'>CodingDojo Wall</a>
         </div>
         <ul class='nav navbar-nav navbar-center'>
-            <li><a><span class='glyphicon glyphicon-user'></span> {{request.session.username}} {{request.session.lastname}}</a></li>
+            <li><a><span class='glyphicon glyphicon-user'></span> {{user.first_name}} {{user.last_name}}</a></li>
         </ul>
         <ul class='nav navbar-nav navbar-right'>
             <li><a>Messages: {{request.session.mymsgs}}</a></li>
